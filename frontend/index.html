@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerador de Relatório — Reedy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>Gerador de Relatório</h1>
+      <p class="subtitle">Preencha os dados e envie as planilhas para gerar o relatório final</p>
+    </header>
+
+    <form id="form-relatorio" novalidate>
+
+      <!-- Seção: Dados fixos -->
+      <section class="card">
+        <h2>Dados do lançamento</h2>
+
+        <div class="field-group">
+
+          <div class="field">
+            <label for="id_filial">ID Filial</label>
+            <input type="text" id="id_filial" name="id_filial" placeholder="Ex: 001" required />
+          </div>
+
+          <div class="field">
+            <label for="valor">Valor (R$)</label>
+            <input type="number" id="valor" name="valor" placeholder="Ex: 30" required />
+          </div>
+
+          <div class="field">
+            <label for="produto">Produto</label>
+            <input type="text" id="produto" name="produto" placeholder="Ex: Reedy 30" required />
+          </div>
+
+          <div class="field">
+            <label for="data_venda">Data de venda</label>
+            <input type="date" id="data_venda" name="data_venda" required />
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Seção: Upload das planilhas -->
+      <section class="card">
+        <h2>Planilhas</h2>
+
+        <div class="field-group">
+
+          <div class="field">
+            <label for="filtro">Filtro de Clientes (.xlsx)</label>
+            <div class="file-wrapper">
+              <input type="file" id="filtro" name="filtro" accept=".xlsx,.xls" required />
+              <span class="file-label" id="label-filtro">Nenhum arquivo selecionado</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="pagamento">Contas a Receber (.xlsx)</label>
+            <div class="file-wrapper">
+              <input type="file" id="pagamento" name="pagamento" accept=".xlsx,.xls" required />
+              <span class="file-label" id="label-pagamento">Nenhum arquivo selecionado</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Mensagem de erro -->
+      <p class="msg erro" id="msg-erro" hidden></p>
+
+      <!-- Mensagem de sucesso -->
+      <p class="msg sucesso" id="msg-sucesso" hidden></p>
+
+      <button type="submit" id="btn-enviar">
+        <span id="btn-texto">Gerar relatório</span>
+        <span id="btn-loading" hidden>Processando...</span>
+      </button>
+
+    </form>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

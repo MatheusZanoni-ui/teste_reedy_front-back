@@ -1,14 +1,34 @@
 import pandas as pd
 import re
-
+import tkinter as tk
+from tkinter import filedialog, messagebox
 # ─────────────────────────────────────────────
 # 1. CONFIGURAÇÕES — ajuste os nomes dos arquivos
 #    e das colunas conforme suas planilhas reais
 # ─────────────────────────────────────────────
 
-ARQUIVO_FILTRO    = "FiltroClientes (16).xlsx"   # Planilha Filtro de Cliente
-ARQUIVO_PAGAMENTO = "Contas_receber (2).xlsx"        # Planilha de Pagamento
-ARQUIVO_SAIDA     = "relatorio_final.xlsx"  # Planilha gerada
+#Abre a janela de seleção de arquivos 
+root = tk.Tk()
+root.withdraw()
+
+messagebox.showinfo ("Passo 1 de 2", "Selecione a planilha de Filtro de Clientes")
+ARQUIVO_FILTRO = filedialog.askopenfilename(
+    title = "Filtro de Clientes",
+    filetypes = [("Excel", "*.xlsx *.xls")]
+)
+
+messagebox.showinfo ("Passo 2 de 2", "Selecione a planilha de Pagamento")
+ARQUIVO_PAGAMENTO = filedialog.askopenfilename(
+    title = "Pagamento",
+    filetypes = [("Excel", "*.xlsx *.xls")]
+)
+
+# Valida se o usuário selecionou os dois arquivos
+if not ARQUIVO_FILTRO or not ARQUIVO_PAGAMENTO:
+    messagebox.showerror("Erro", "Por favor, selecione um arquivo valido!")
+    exit()
+
+ARQUIVO_SAIDA = "relatorio_final.xlsx"
 
 # Nomes exatos das colunas em cada planilha (ajuste se necessário)
 COL_CPF_FILTRO    = "CPF (CIN)"
