@@ -30,7 +30,15 @@ def gerar_relatorio(arquivo_filtro, arquivo_pagamento, id_filial, valor, produto
         indicator=True
     )
     df_nao_encontrados = df_anti[df_anti["_merge"] == "left_only"].copy()
-    df_nao_encontrados = df_nao_encontrados.drop(columns=["_merge", COL_CPF_FILTRO])
+    df_nao_encontrados = df_nao_encontrados.drop(columns=["_merge"]) 
+
+    df_nao_encontrados = pd.DataFrame({
+        "PRIMEIRO_NOME" : df_nao_encontrados[COL_NOME_PAG].str.split().str[0],
+        "SEGUNDO_NOME" : df_nao_encontrados[COL_NOME_PAG].str.split().str[1],
+        "CPF (CIN)" : df_nao_encontrados[COL_CPF_PAG],
+        "VALOR" : valor, 
+        "LANÇAMENTO" : df_nao_encontrados[COL_DATA],
+    })
 
     df_reedy = df_filtro[
         df_filtro[COL_CONTRATO].str.contains(TEXTO_REEDY, case=False, na=False)
